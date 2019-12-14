@@ -1,5 +1,5 @@
 ---
-cron_packages: cron
+cron_packages: cronie
 
 cron_enable_repo: ""
 
@@ -18,4 +18,3 @@ cron_common_jobs: []
 cron_group_jobs: []
 
 cron_host_jobs: []
-

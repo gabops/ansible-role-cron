@@ -1,5 +1,43 @@
 ---
 - name: Converge
   hosts: all
+  vars:
+    cron_vars:
+      - name: PATH
+        value: /usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin
+        user: root
+      - name: SHELL
+        value: /usr/bin/zsh
+        user: root
+
+    cron_common_jobs:
+      - name: common-job
+        user: root
+        job: touch /tmp/common_job
+        minute: '*/3'
+        hour: '*'
+        day: '*'
+        month: '*'
+        weekday: '*'
+
+    cron_group_jobs:
+      - name: group-job
+        user: root
+        job: touch /tmp/group_job
+        minute: '*/3'
+        hour: '*'
+        day: '*'
+        month: '*'
+        weekday: '*'
+
+    cron_host_jobs:
+      - name: host-job
+        user: root
+        job: touch /tmp/host_job
+        minute: '*/3'
+        hour: '*'
+        day: '*'
+        month: '*'
+        weekday: '*'
   roles:
     - role: "{{ lookup('env', 'MOLECULE_PROJECT_DIRECTORY') | basename }}"

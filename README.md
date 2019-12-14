@@ -19,11 +19,14 @@ Role Variables
 | cron_service_enabled | true | Defines wheter or not crond service is enabled when appliying this role. |
 | cron_service_started | true | Defines wheter or not crond service is started when appliying this role. |
 | cron_contab_backup | true | Defines if the role takes a backup of the crontab before applying any changes. |
-| cron_vars | [] |   |
-| cron_jobs | [] | A list of cron jobs to be added to the targeted host. | 
-| cron_common_jobs | [] | A list of cron jobs to be applied commonly to all hosts. |
-| cron_group_jobs | [] | A list of cron jobs to be applied to a specific group of hosts. |
-| cron_host_jobs | [] | A list of cron jobs to be applied to a specific host. |
+| cron_vars | [] | Defines the environment variables to be added to the crontab. | 
+| cron_jobs | [] | This variable can be used to define cron jobs directly from playbook. You can use it alone or in conjuction with any of the variabes below. |
+| cron_common_jobs | [] | This variable can be used to define cron jobs to be configured commonly. Tipically you would dfine this variable in the `all` metagroup. |
+| cron_group_jobs | [] | This variable can be used to define cron jobs to be configured in a specific inventory group like, for example, `webserver` or `databases`.The groups obviously depend on your inventory. |
+| cron_host_jobs | [] | This variable is used to define cron jobs to be configured in a specific host. |
+
+> The values of the variables in `cron_common_jobs`, `cron_group_jobs`, `cron_host_jobs` will be merged if the variables are accessible 
+for the host you are targeting. See `Example playbook` below.
 
 Dependencies
 ------------
@@ -33,13 +36,86 @@ None.
 Example Playbook
 ----------------
 
+- group_vars/all/cron.yml:
 ```yaml
-    - hosts: servers
+cron_common_jobs:
+  - name: common-job
+    user: root
+    job: touch /tmp/common_job
+    minute: '*/3'
+    hour: '*'
+    day: '*'
+    month: '*'
+    weekday: '*' 
+```
+
+- group_vars/webservers/cron.yml:
+```yaml
+cron_group_jobs:
+  - name: group-job
+    user: root
+    job: touch /tmp/group_job
+    minute: '*/3'
+    hour: '*'
+    day: '*'
+    month: '*'
+    weekday: '*' 
+```
+
+- host_vars/webservers-01/cron.yml:
+```yaml
+cron_host_jobs:
+  - name: webserver-host-job
+    user: root
+    job: touch /tmp/host_job
+    minute: '*/3'
+    hour: '*'
+    day: '*'
+    month: '*'
+    weekday: '*' 
+```
+
+- host_vars/database-01/cron.yml:
+```yaml
+cron_host_jobs:
+  - name: database-host-job
+    user: root
+    job: touch /tmp/host_job
+    minute: '*/3'
+    hour: '*'
+    day: '*'
+    month: '*'
+    weekday: '*' 
+```
+
+- The playbook:
+```yaml
+    - hosts: all
       vars:
-        foo: bar
+        cron_vars:
+        - name: PATH
+          value: /usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin 
+          user: root
+
+        - name: SHELL
+          value: /usr/bin/zsh 
+          user: jdoe
+        cron_jobs:
+          - name: from-playbook-job
+            user: root
+            job: touch /tmp/host_job
+            minute: '*/3'
+            hour: '*'
+            day: '*'
+            month: '*'
+            weekday: '*'
       roles:
          - role: gabops.cron
 ```
+
+Following the previous example, the hypothetical host *webserver-01* will be configured with the cron jobs `common-job`, `group-job`,
+`webserver-host-job` and `from-playbook-job` however *database-01* will be configured with just with `common-job`, `database-host-job` 
+and `from-playbook-job`.
 
 License
 -------

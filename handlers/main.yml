@@ -1,1 +1,6 @@
 ---
+- name: restart cron
+  service:
+    name: "{{ cron_daemon_name }}"
+    state: restarted
+  when: cron_service_started | bool

@@ -1,14 +1,24 @@
 ---
+- name: Configure cron variables
+  cronvar:
+    backup: "{{ item.backup | default(omit) }}"
+    cron_file: "{{ item.cron_file | default(omit) }}"
+    insertafter: "{{ item.insertafter | default(omit) }}"
+    insertbefore: "{{ item.insertbefore | default(omit) }}"
+    name: "{{ item.name | default(omit) }}"
+    state: "{{ item.state | default(omit) }}"
+    user: "{{ item.user | default(omit) }}"
+    value: "{{ item.value | default(omit) }}"
+  with_items: "{{ cron_vars }}"
+
 - name: Configure cron jobs
   cron:
     backup: "{{ cron_crontab_backup | default(omit) }}"
     cron_file: "{{ item.cron_file | default(omit) }}"
-    day: "{{ item.day | default(omit)  }}"
-    disabled: "{{ item.disables | default(omit)  }}"
+    day: "{{ item.day | default(omit) }}"
+    disabled: "{{ item.disables | default(omit) }}"
     env: "{{ item.env | default(omit) }}"
     hour: "{{ item.hour | default(omit) }}"
-    # insertafter
-    # insertbefore
     job: "{{ item.job | default(omit) }}"
     minute: "{{ item.minute | default(omit) }}"
     month: "{{ item.month | default(omit) }}"
@@ -19,3 +29,7 @@
     weekday: "{{ item.weekday | default(omit) }}"
   loop: "{{ cron_jobs_merged }}"
 
+- name: Configure cron service
+  service:
+    name: "{{ cron_daemon_name }}"
+    enabled: "{{ cron_service_enabled }}"
