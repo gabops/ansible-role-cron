@@ -1,0 +1,11 @@
+---
+- name: Combine common, group and host cron jobs
+  set_fact:
+    cron_jobs_merged:
+      {{
+              cron_common_jobs | default([]) |
+              union(cron_group_jobs | default([])) |
+              union(cron_host_jobs | default([])
+      }}
+
+      

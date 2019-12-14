@@ -1,0 +1,14 @@
+---
+- name: Install cron (RedHat)
+  yum:
+    name: "{{ cron_packages }}"
+    state: installed
+    enablerepo: "{{ cron_enable_repo }}"
+  when: ansible_os_family is "Redhat"
+
+- name: Install cron (Debian)
+  apt:
+    name: "{{ cron_packages }}"
+    state: installed
+  when: ansible_os_family is "Debian"
+

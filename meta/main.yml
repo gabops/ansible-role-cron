@@ -1,0 +1,35 @@
+---
+galaxy_info:
+  role_name: cron
+  author: Gabriel Suarez
+  description: Installs and configures Cron.
+  license: MIT
+  min_ansible_version: 2.4
+  platforms:
+    - name: EL
+      versions:
+        - 6
+        - 7
+    - name: Amazon
+      versions:
+        - 2016.09
+        - 2017.03
+        - 2017.09
+        - 2017.12
+    - name: Debian
+      versions:
+        - jessie
+        - stretch
+    - name: Ubuntu
+      versions:
+        - xenial
+        - bionic
+  galaxy_tags:
+    - cron
+    - system
+    - centos
+    - debian
+    - redhat
+    - amazon
+
+dependencies: []

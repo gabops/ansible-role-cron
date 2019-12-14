@@ -1,0 +1,21 @@
+---
+cron_packages: cron
+
+cron_enable_repo: ""
+
+cron_service_enabled: true
+
+cron_service_started: true
+
+cron_crontab_backup: false
+
+cron_vars: []
+
+cron_jobs: []
+
+cron_common_jobs: []
+
+cron_group_jobs: []
+
+cron_host_jobs: []
+
