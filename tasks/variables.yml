@@ -1,5 +1,13 @@
 ---
-- name: Combine common, group and host cron jobs
+- name: Include os family specific variables
+  include_vars: "{{ ansible_os_family }}.yml"
+
+- name: Set cron packages
+  set_fact:
+    cron_packages: "{{ __cron_packages }}"
+  when: cron_packages | length == 0
+
+- name: Set cron jobs
   set_fact:
     cron_jobs_merged: >
       {{
