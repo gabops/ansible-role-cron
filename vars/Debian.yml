@@ -1,2 +1,3 @@
 ---
+cron_daemon_name: cron
 __cron_packages: cron
