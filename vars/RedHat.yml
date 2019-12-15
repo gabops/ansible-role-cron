@@ -1,2 +1,3 @@
 ---
+cron_daemon_name: crond
 __cron_packages: cronie
