@@ -6,9 +6,17 @@ testinfra_hosts = testinfra.utils.ansible_runner.AnsibleRunner(
     os.environ['MOLECULE_INVENTORY_FILE']).get_hosts('all')
 
 
-def test_hosts_file(host):
-    f = host.file('/etc/hosts')
+def test_cron_jobs(host):
+    c = host.run('crontab -l')
 
-    assert f.exists
-    assert f.user == 'root'
-    assert f.group == 'root'
+    assert '*/3 * * * * touch /tmp/cron_job' in c.stdout
+    assert '*/3 * * * * touch /tmp/common_job' in c.stdout
+    assert '*/3 * * * * touch /tmp/group_job' in c.stdout
+    assert '*/3 * * * * touch /tmp/host_job' in c.stdout
+
+
+def test_cron_service(host):
+    s = host.service('crond')
+
+    assert s.is_running
+    assert s.is_enabled

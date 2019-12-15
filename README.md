@@ -20,9 +20,9 @@ Role Variables
 | cron_service_started | true | Defines wheter or not crond service is started when appliying this role. |
 | cron_contab_backup | true | Defines if the role takes a backup of the crontab before applying any changes. |
 | cron_vars | [] | Defines the environment variables to be added to the crontab. | 
-| cron_jobs | [] | This variable can be used to define cron jobs directly from playbook. You can use it alone or in conjuction with any of the variabes below. |
+| cron_jobs | [] | This variable can be used for example to define cron jobs directly from playbook. You can use it alone or in conjuction with any of the variabes below. |
 | cron_common_jobs | [] | This variable can be used to define cron jobs to be configured commonly. Tipically you would dfine this variable in the `all` metagroup. |
-| cron_group_jobs | [] | This variable can be used to define cron jobs to be configured in a specific inventory group like, for example, `webserver` or `databases`.The groups obviously depend on your inventory. |
+| cron_group_jobs | [] | This variable can be used to define cron jobs to be configured in a specific inventory group like, for example, `webservers` or `databases`.The group names obviously depend on your inventory. |
 | cron_host_jobs | [] | This variable is used to define cron jobs to be configured in a specific host. |
 
 > The values of the variables in `cron_common_jobs`, `cron_group_jobs`, `cron_host_jobs` will be merged if the variables are accessible 
@@ -62,7 +62,7 @@ cron_group_jobs:
     weekday: '*' 
 ```
 
-- host_vars/webservers-01/cron.yml:
+- host_vars/webserver-01/cron.yml:
 ```yaml
 cron_host_jobs:
   - name: webserver-host-job
@@ -113,9 +113,18 @@ cron_host_jobs:
          - role: gabops.cron
 ```
 
-Following the previous example, the hypothetical host *webserver-01* will be configured with the cron jobs `common-job`, `group-job`,
-`webserver-host-job` and `from-playbook-job` however *database-01* will be configured with just with `common-job`, `database-host-job` 
-and `from-playbook-job`.
+Following the previous example, the hypothetical host *webserver-01* will be configured with the cron jobs:
+1. `common-job`
+2. `group-job`
+3. `webserver-host-job`
+4. `from-playbook-job` 
+
+However *database-01* will be configured with just with
+1. `common-job`
+2. `database-host-job` 
+3. `from-playbook-job`
+
+The values defined in `cron_vars` will be added to both.
 
 License
 -------

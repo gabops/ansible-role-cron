@@ -9,7 +9,8 @@
     state: "{{ item.state | default(omit) }}"
     user: "{{ item.user | default(omit) }}"
     value: "{{ item.value | default(omit) }}"
-  with_items: "{{ cron_vars }}"
+  loop: "{{ cron_vars }}"
+  notify: restart cron
 
 - name: Configure cron jobs
   cron:
@@ -28,6 +29,7 @@
     user: "{{ item.user | default(omit) }}"
     weekday: "{{ item.weekday | default(omit) }}"
   loop: "{{ cron_jobs_merged }}"
+  notify: restart cron
 
 - name: Configure cron service
   service:

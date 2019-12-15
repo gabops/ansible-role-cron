@@ -3,7 +3,8 @@
   set_fact:
     cron_jobs_merged: >
       {{
-        cron_common_jobs | default([]) |
+        cron_jobs | default([]) |
+        union(cron_common_jobs | default([])) |
         union(cron_group_jobs | default([])) |
         union(cron_host_jobs | default([]))
       }}

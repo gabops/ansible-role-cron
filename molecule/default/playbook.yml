@@ -39,5 +39,16 @@
         day: '*'
         month: '*'
         weekday: '*'
+
+    cron_jobs:
+      - name: cron-job
+        user: root
+        job: touch /tmp/cron_job
+        minute: '*/3'
+        hour: '*'
+        day: '*'
+        month: '*'
+        weekday: '*'
+
   roles:
     - role: "{{ lookup('env', 'MOLECULE_PROJECT_DIRECTORY') | basename }}"
