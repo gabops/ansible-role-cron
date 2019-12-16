@@ -19,7 +19,7 @@ def test_cron_service(host):
     os = host.system_info.distribution
     if os in ("ubuntu", "debian"):
         service_name = 'cron'
-    elif os in ("amzn", "centos"):
+    else:
         service_name = 'crond'
 
     s = host.service(service_name)
