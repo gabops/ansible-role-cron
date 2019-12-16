@@ -16,7 +16,13 @@ def test_cron_jobs(host):
 
 
 def test_cron_service(host):
-    s = host.service('crond')
+    os = host.system_info.distribution
+    if os in ("ubuntu", "debian"):
+        service_name = 'cron'
+    elif os in ("amzn", "centos"):
+        service_name = 'crond'
+
+    s = host.service(service_name)
 
     assert s.is_running
     assert s.is_enabled
