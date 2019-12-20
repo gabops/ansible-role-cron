@@ -5,7 +5,7 @@ cron_enable_repo: ""
 
 cron_service_enabled: true
 
-cron_service_started: true
+cron_service_state: started
 
 cron_crontab_backup: false
 

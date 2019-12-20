@@ -2,5 +2,5 @@
 - name: restart cron
   service:
     name: "{{ cron_daemon_name }}"
-    state: restarted
-  when: cron_service_started | bool
+    state: "{{ cron_service_state }}"
+  when: cron_service_state != "ignore"
