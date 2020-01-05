@@ -20,13 +20,10 @@ Role Variables
 | cron_service_state | true | Defines the state of the cron service. Use `ignore` if you want the role to do nothing with cron when being applied. |
 | cron_contab_backup | true | Defines if the role takes a backup of the crontab before applying any changes. |
 | cron_vars | [] | Defines the environment variables to be added to the crontab. | 
-| cron_jobs | [] | This variable can be used for example to define cron jobs directly from playbook. You can use it alone or in conjuction with any of the variabes below. |
-| cron_common_jobs | [] | This variable can be used to define cron jobs to be configured commonly. Tipically you would dfine this variable in the `all` metagroup. |
-| cron_group_jobs | [] | This variable can be used to define cron jobs to be configured in a specific inventory group like, for example, `webservers` or `databases`.The group names obviously depend on your inventory. |
-| cron_host_jobs | [] | This variable is used to define cron jobs to be configured in a specific host. |
-
-> The values of the variables in `cron_common_jobs`, `cron_group_jobs`, `cron_host_jobs` will be merged if the variables are accessible 
-for the host you are targeting. See `Example playbook` below.
+| cron_jobs | [] | Defines Cron jobs to be applied. Tipically you will define this variable directly in the playbook. |
+| cron_common_jobs | [] | Defines common Cron jobs to be applied. Tipically you will define this variable in the `all` metagroup. |
+| cron_group_jobs | [] | Defines Cron jobs to be applied in a inventory group. Tipically you will define this variable in a group(s) vars of your inventory (e.g. group_vars/webservers/). |
+| cron_host_jobs | [] | Defines Cron jobs to be applied in a specific host. Tipically you will define this in a host_vars file (e.g. host_vars/host-01/). |
 
 Dependencies
 ------------
@@ -124,7 +121,7 @@ However *database-01* will be configured with just with
 2. `database-host-job` 
 3. `from-playbook-job`
 
-The values defined in `cron_vars` will be added to both.
+The values defined in `cron_vars` will be added on both.
 
 License
 -------
