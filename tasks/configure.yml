@@ -31,7 +31,14 @@
   loop: "{{ cron_jobs_merged }}"
   notify: restart cron
 
-- name: Configure cron service
+- name: Enable cron service
   service:
     name: "{{ cron_daemon_name }}"
-    enabled: "{{ cron_service_enabled }}"
+    enabled: true
+  when: cron_service_enabled | bool
+
+- name: Start cron service
+  service:
+    name: "{{ cron_daemon_name }}"
+    state: started
+  when: cron_service_started | bool
