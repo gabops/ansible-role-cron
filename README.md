@@ -17,7 +17,7 @@ Role Variables
 | cron_packages | "" | Defines the packages to be applied in order to install cron. By default, the role handles the packages to install [RedHat](vars/RedHat.yml) and [Debian](vars/Debian.yml) however you can overwrite the packages by using this variable. |
 | cron_enable_repo | ""  | Defines the repo to be enabled when installing the packages defined in `cron_packages` variable. Note that this option only works in RedHat os family distributions. |
 | cron_service_enabled | true | Defines wheter or not crond service is enabled when appliying this role. |
-| cron_service_state | true | Defines the state of the cron service. Use `ignore` if you want the role to do nothing with cron when being applied. |
+| cron_service_started | true | Defines if the cron service should be started or not. |
 | cron_contab_backup | true | Defines if the role takes a backup of the crontab before applying any changes. |
 | cron_vars | [] | Defines the environment variables to be added to the crontab. | 
 | cron_jobs | [] | Defines Cron jobs to be applied. Tipically you will define this variable directly in the playbook. |
