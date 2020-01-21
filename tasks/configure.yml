@@ -3,6 +3,7 @@
   service:
     name: "{{ cron_daemon_name }}"
     enabled: "{{ cron_service_enabled }}"
+    state: "{{ cron_service_state }}"
 
 - name: Configure cron variables
   cronvar:
@@ -33,5 +34,5 @@
     state: "{{ item.state | default(omit) }}"
     user: "{{ item.user | default(omit) }}"
     weekday: "{{ item.weekday | default(omit) }}"
-  loop: "{{ cron_jobs_merged }}"
+  loop: "{{ cron_jobs }}"
   notify: restart cron
