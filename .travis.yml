@@ -13,6 +13,7 @@ env:
     - TEST_DISTRO: amazonlinux:2018.03
     - TEST_DISTRO: debian:8
     - TEST_DISTRO: debian:9
+    - TEST_DISTRO: debian:10
     - TEST_DISTRO: ubuntu:16.04
     - TEST_DISTRO: ubuntu:18.04
 

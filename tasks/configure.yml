@@ -1,4 +1,9 @@
 ---
+- name: Configure cron service
+  service:
+    name: "{{ cron_daemon_name }}"
+    enabled: "{{ cron_service_enabled }}"
+
 - name: Configure cron variables
   cronvar:
     backup: "{{ item.backup | default(omit) }}"
@@ -30,8 +35,3 @@
     weekday: "{{ item.weekday | default(omit) }}"
   loop: "{{ cron_jobs_merged }}"
   notify: restart cron
-
-- name: Configure cron service
-  service:
-    name: "{{ cron_daemon_name }}"
-    enabled: "{{ cron_service_enabled }}"
