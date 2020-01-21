@@ -77,22 +77,6 @@ Example Playbook
       - role: gabops.cron
 ```
 
-<<<<<<< HEAD
-=======
-Following the previous example, the hypothetical host *webserver-01* will be configured with the cron jobs:
-1. `common-job`
-2. `group-job`
-3. `webserver-host-job`
-4. `from-playbook-job` 
-
-However *database-01* will be configured with just with
-1. `common-job`
-2. `database-host-job` 
-3. `from-playbook-job`
-
-The values defined in `cron_vars` will be added on both.
-
->>>>>>> 5870ec39f666225892b83324d752113335049b58
 License
 -------
 
