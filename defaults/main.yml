@@ -12,9 +12,3 @@ cron_crontab_backup: false
 cron_vars: []
 
 cron_jobs: []
-
-cron_common_jobs: []
-
-cron_group_jobs: []
-
-cron_host_jobs: []

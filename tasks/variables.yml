@@ -6,13 +6,3 @@
   set_fact:
     cron_packages: "{{ __cron_packages }}"
   when: cron_packages | length == 0
-
-- name: Set cron jobs
-  set_fact:
-    cron_jobs_merged: >
-      {{
-        cron_jobs | default([]) |
-        union(cron_common_jobs | default([])) |
-        union(cron_group_jobs | default([])) |
-        union(cron_host_jobs | default([]))
-      }}
