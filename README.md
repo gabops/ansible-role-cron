@@ -14,7 +14,7 @@ Role Variables
 
 | Variable | Default value | Description |
 | :--- | :--- | :--- |
-| cron_packages | "" | Defines the packages to be applied in order to install cron. By default, the role handles the packages to install (RedHat)[./vars/RedHat.yml] and (Debian)[./vars/Debian.yml] however you can overwrite the packages by using this variable. |
+| cron_packages | "" | Defines the packages to be applied in order to install cron. By default, the role handles the packages to install [RedHat](vars/RedHat.yml) and [Debian](vars/Debian.yml) however you can overwrite the packages by using this variable. |
 | cron_enable_repo | ""  | Defines the repo to be enabled when installing the packages defined in `cron_packages` variable. Note that this option only works in RedHat os family distributions. |
 | cron_service_enabled | true | Defines wheter or not crond service is enabled when appliying this role. |
 | cron_service_state | started | Defines the state of the cron service. |
@@ -77,6 +77,22 @@ Example Playbook
       - role: gabops.cron
 ```
 
+<<<<<<< HEAD
+=======
+Following the previous example, the hypothetical host *webserver-01* will be configured with the cron jobs:
+1. `common-job`
+2. `group-job`
+3. `webserver-host-job`
+4. `from-playbook-job` 
+
+However *database-01* will be configured with just with
+1. `common-job`
+2. `database-host-job` 
+3. `from-playbook-job`
+
+The values defined in `cron_vars` will be added on both.
+
+>>>>>>> 5870ec39f666225892b83324d752113335049b58
 License
 -------
 
