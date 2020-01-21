@@ -34,17 +34,17 @@ Example Playbook
 - hosts: all
   vars:
     cron_vars:
-    - name: PATH
-      value: /usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin 
-      user: root
+      - name: PATH
+        value: /usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin 
+        user: root
 
-    - name: SHELL
-      value: /usr/bin/sh
-      user: root
+      - name: SHELL
+        value: /usr/bin/sh
+        user: root
 
-    - name: SHELL
-      value: /usr/bin/zsh 
-      user: jdoe
+      - name: SHELL
+        value: /usr/bin/zsh 
+        user: jdoe
     cron_jobs:
       - name: a_job
         user: root
