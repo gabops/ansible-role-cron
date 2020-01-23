@@ -18,9 +18,9 @@ Role Variables
 | cron_enable_repo | ""  | Defines the repo to be enabled when installing the packages defined in `cron_packages` variable. Note that this option only works in RedHat os family distributions. |
 | cron_service_enabled | true | Defines wheter or not crond service is enabled when appliying this role. |
 | cron_service_state | started | Defines the state of the cron service. |
-| cron_contab_backup | true | Defines if the role takes a backup of the crontab before applying any changes. |
-| cron_vars | [] | Defines the environment variables to be added to the crontab. | 
-| cron_jobs | [] | Defines the cron jobs to be configured on the system. |
+| cron_contab_backup | false | Defines if the role takes a backup of the crontab before applying any changes. |
+| cron_vars | [] | Defines the environment variables to be added to the crontab. The parameters for each *var* definition can be found on [cronvar module documentation](https://docs.ansible.com/ansible/latest/modules/cronvar_module.html). |
+| cron_jobs | [] | Defines the cron jobs to be configured on the system. The parameters for each *job* definition can be found on [cron module documentation](https://docs.ansible.com/ansible/latest/modules/cron_module.html). |
 
 Dependencies
 ------------
