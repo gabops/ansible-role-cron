@@ -20,7 +20,7 @@ Role Variables
 | cron_service_state | started | Defines the state of the cron service. |
 | cron_contab_backup | true | Defines if the role takes a backup of the crontab before applying any changes. |
 | cron_vars | [] | Defines the environment variables to be added to the crontab. | 
-| cron_jobs | [] | This variable can be used for example to define cron jobs directly from playbook. You can use it alone or in conjuction with any of the variabes below. |
+| cron_jobs | [] | Defines the cron jobs to be configured on the system. |
 
 Dependencies
 ------------
@@ -35,7 +35,7 @@ Example Playbook
   vars:
     cron_vars:
       - name: PATH
-        value: /usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin 
+        value: /usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin
         user: root
 
       - name: SHELL
@@ -43,8 +43,9 @@ Example Playbook
         user: root
 
       - name: SHELL
-        value: /usr/bin/zsh 
-        user: jdoe
+        value: /usr/bin/zsh
+        user: john.doe
+
     cron_jobs:
       - name: a_job
         user: root
@@ -58,20 +59,17 @@ Example Playbook
       - name: another_job
         user: application
         job: touch /tmp/another_job
-        minute: '*/3'
+        disabled: true
+        minute: 40
         hour: '*'
         day: '*'
         month: '*'
-        weekday: '*'
+        weekday: 3
 
       - name: and_another_job
         user: john.doe
-        job: touch /tmp/and_another_job
-        minute: '*/3'
-        hour: '*'
-        day: '*'
-        month: '*'
-        weekday: '*'
+        job: touch /tmp/touch_monthly
+        special_time: monthly
 
   roles:
       - role: gabops.cron
