@@ -23,7 +23,7 @@
     backup: "{{ cron_crontab_backup | default(omit) }}"
     cron_file: "{{ item.cron_file | default(omit) }}"
     day: "{{ item.day | default(omit) }}"
-    disabled: "{{ item.disables | default(omit) }}"
+    disabled: "{{ item.disabled | default(omit) }}"
     env: "{{ item.env | default(omit) }}"
     hour: "{{ item.hour | default(omit) }}"
     job: "{{ item.job | default(omit) }}"
