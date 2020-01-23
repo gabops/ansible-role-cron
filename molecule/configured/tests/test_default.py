@@ -11,8 +11,13 @@ def test_cron_jobs(host):
 
     assert('SHELL=/usr/bin/sh') in c.stdout
     assert '*/3 * * * * touch /tmp/a_job' in c.stdout
-    assert '*/3 * * * * touch /tmp/another_job' in c.stdout
-    assert '*/3 * * * * touch /tmp/and_another_job' in c.stdout
+
+    c = host.run('crontab -l -u john.doe')
+    assert 'SHELL=/usr/bin/zsh' in c.stdout
+    assert '@monthly touch /tmp/and_another_job' in c.stdout
+
+    c = host.run('crontab -l -u application')
+    assert '#40 * * * 3 touch /tmp/another_job' in c.stdout
 
 
 def test_cron_service(host):

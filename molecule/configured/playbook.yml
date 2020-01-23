@@ -6,9 +6,14 @@
       - name: PATH
         value: /usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin
         user: root
+
       - name: SHELL
         value: /usr/bin/sh
         user: root
+
+      - name: SHELL
+        value: /usr/bin/zsh
+        user: john.doe
 
     cron_jobs:
       - name: a_job
@@ -21,22 +26,19 @@
         weekday: '*'
 
       - name: another_job
-        user: root
+        user: application
         job: touch /tmp/another_job
-        minute: '*/3'
+        disabled: true
+        minute: 40
         hour: '*'
         day: '*'
         month: '*'
-        weekday: '*'
+        weekday: 3
 
       - name: and_another_job
-        user: root
+        user: john.doe
         job: touch /tmp/and_another_job
-        minute: '*/3'
-        hour: '*'
-        day: '*'
-        month: '*'
-        weekday: '*'
+        special_time: monthly
 
   roles:
     - role: "{{ lookup('env', 'MOLECULE_PROJECT_DIRECTORY') | basename }}"
