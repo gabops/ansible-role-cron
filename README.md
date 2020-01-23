@@ -14,13 +14,16 @@ Role Variables
 
 | Variable | Default value | Description |
 | :--- | :--- | :--- |
-| cron_packages | "" | Defines the packages to be applied in order to install cron. By default, the role handles the packages to install [RedHat](vars/RedHat.yml) and [Debian](vars/Debian.yml) however you can overwrite the packages by using this variable. |
-| cron_enable_repo | ""  | Defines the repo to be enabled when installing the packages defined in `cron_packages` variable. Note that this option only works in RedHat os family distributions. |
-| cron_service_enabled | true | Defines wheter or not crond service is enabled when appliying this role. |
+| cron_packages | [] | Defines the list of packages to be installed in order to install Cron. Note **that this role handles the packages to install already** ([RedHat](vars/RedHat.yml), [Debian](vars/Debian.yml)) however, this variable exists for allowing you to declare your own list of packages if required. |
+| cron_enable_repo | ""  | Defines the repo to be enabled when installing the packages defined in `cron_packages` variable. Note that this option only works in RedHat family distributions. |
+| cron_service_enabled | true | Defines wheter or not cron service is enabled when applying this role. |
 | cron_service_state | started | Defines the state of the cron service. |
-| cron_contab_backup | false | Defines if the role takes a backup of the crontab before applying any changes. |
+| cron_crontab_backup | false | Controls if the role takes a backup of the crontab before applying any changes. Note that this variable is used to set this behaviour globally however, you can specify this behaviour individually on a specific cron var/job by setting the parameter `backup` true or false on the definition. See `Example Playbook` below. |
 | cron_vars | [] | Defines the environment variables to be added to the crontab. The parameters for each *var* definition can be found on [cronvar module documentation](https://docs.ansible.com/ansible/latest/modules/cronvar_module.html). |
 | cron_jobs | [] | Defines the cron jobs to be configured on the system. The parameters for each *job* definition can be found on [cron module documentation](https://docs.ansible.com/ansible/latest/modules/cron_module.html). |
+
+#### Note:
+> Backups are stored on `/tmp/`
 
 Dependencies
 ------------
@@ -68,6 +71,7 @@ Example Playbook
 
       - name: and_another_job
         user: john.doe
+        backup: true
         job: touch /tmp/touch_monthly
         special_time: monthly
 
