@@ -1,5 +1,5 @@
 ---
-cron_packages: ""
+cron_packages: []
 
 cron_enable_repo: ""
 
