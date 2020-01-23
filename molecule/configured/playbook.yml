@@ -37,6 +37,7 @@
 
       - name: and_another_job
         user: john.doe
+        backup: true
         job: touch /tmp/and_another_job
         special_time: monthly
 
