@@ -22,8 +22,8 @@ Role Variables
 | cron_vars | [] | Defines the environment variables to be added to the crontab. The parameters for each *var* definition can be found on [cronvar module documentation](https://docs.ansible.com/ansible/latest/modules/cronvar_module.html). |
 | cron_jobs | [] | Defines the cron jobs to be configured on the system. The parameters for each *job* definition can be found on [cron module documentation](https://docs.ansible.com/ansible/latest/modules/cron_module.html). |
 
-#### Note:
-> Backups are stored on `/tmp/`
+### Notes:
+- Crontab backups are stored on `/tmp/`.
 
 Dependencies
 ------------
